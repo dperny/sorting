@@ -3,49 +3,45 @@ from scanner import *
 import sys
 import datetime
 import gnuplotter
+import random
 
 def main(args):
-	if(4 > len(args)):
-		print('Usage: python3',args[0],'searchtype timevalue datafile',file=sys.stderr)
-		return 1
+    if(4 > len(args)):
+        print('Usage: python3',args[0],'lowbound datapoints stepsize sorted/unsorted',file=sys.stderr)
+        return 1
 
-	values = 1 
-	stringout = ""
-	while(values <= 20):
-		array = DCArray(values)
-		s = Scanner(args[3])
-		i = 0
-		while(i < values):
-			array.backadd(s.readint())
-			i += 1
+    # build the list of integers we're going to read from
+    random.seed()
+    start = random.randint(0,100)
+    #we need a number of items equal to the number of datapoints times
+    #the distance between each
+    count = args[2] * args[3]
+    step = random.randint(0,10)
+    #sorted or unsorted
+    if(args[4][0] = "s"):
+        values = makeIntegers(count,start,step,0)
+    elif(args[4][0] = "u"):
+        values = makeIntegers(count,start,step,count)
+    else:
+        return 1
 
-		if(args[1][0] == 'l' or args[1][0] == 'L'): 
-			print("running linear search...")
-			start = datetime.datetime.now()
-			array.lsearch(30001)
-			end = datetime.datetime.now()
-		elif(args[1][0] == 'b' or args[1][0] == 'B'):
-			print("running binary search...")
-			start = datetime.datetime.now()
-			array.bsearch(30001)
-			end = datetime.datetime.now()
-		else:
-			print("Invalid searchtype",file=sys.stderr)
-			return 1
+    results = []
+    for i in range(count):
 
-		time = end - start
-		elapsedTime = time.microseconds
-		stringout = stringout + str(values) + ' ' + str(elapsedTime) + '\n'
+        data = SearchArray(i*steps)
+        for j in range(len(data)):
+            array.backadd(values[j])
+        array.default()
 
-		values += 1
+        #test the searches count times
 
-	outfile = args[1] + '.out'
-	with open(outfile,"w") as out:
-		out.write(stringout)
+    #at the end, there's a massive 2D array of execution times for various amounts of data
 
-	gnuplotter.buildgraph(args[1],args[2])
+    #use the buildtable function from gnuplotter to build a table of data and write out
 
-	return
+
+
+
 
 if __name__ == '__main__':
-	main(sys.argv)
+    sys.exit(main(sys.argv))

@@ -16,6 +16,9 @@ class DCArray:
         self._startIndex = 0
         self._endIndex = 0
 
+    def __len__(self):
+        return self._size
+
     def get(self,index):
         """returns the value at index"""
         self._verifyIndex(index)
@@ -109,7 +112,7 @@ class DCArray:
             return False
 
     def size(self):
-        """returns the size of the array. DAT ABSTRACTION"""
+        """returns the size of the array. use len(self) instead"""
         return self._size
 
     def capacity(self):
