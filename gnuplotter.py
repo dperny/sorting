@@ -1,24 +1,12 @@
-def buildtable(values):
+def buildtable(values,filename):
     writeString = ""
+    filename = filename + ".dat"
     for i in range(len(values)):
         for j in range(len(values[i])):
             writeString = writeString + str(values[i][j]) + '\t'
         writeString = writeString + '\n'
 
-    with open("data.txt","w") as fp:
+    with open(filename,"w") as fp:
         fp.write(writeString)
-
-    return
-
-def buildgraph(searchtype,yticks):
-    with open("timings.gplot","r") as infile:
-        outstring = infile.read();
-
-    outstring = outstring + "    set output \"{0}.eps\"\n".format(searchtype)
-    outstring = outstring + "    plot \\\n"
-    outstring = outstring + "        \"{0}.out\" using 1:2 title \"{1}\"\n".format(searchtype,searchtype)
-
-    with open("{0}.gplot".format(searchtype),"w") as outfile:
-        outfile.write(outstring)
 
     return
