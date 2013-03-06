@@ -18,7 +18,7 @@ class SearchArray(DCArray):
 
         self._default = None
 
-    def default(self):
+    def mark(self):
         self._default = deepcopy(self._store)
 
     def refresh(self):
@@ -27,14 +27,14 @@ class SearchArray(DCArray):
         else:
             return 1
 
-    def selectionsSort(self):
+    def selectionsort(self):
+        pass
+        
+    def insertionsort(self):
         pass
 
-    def insertionSort(self):
+    def quicksort(self):
         pass
 
-    def quickSort(self):
-        pass
-
-    def mergeSort(self):
+    def mergesort(self):
         pass
