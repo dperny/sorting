@@ -42,9 +42,7 @@ def main(args):
         array = SearchArray(i*stepsize)
         for j in range(i*stepsize):
             array.backadd(values[j])
-        # store the original array with mark. we will refresh later
-        array.mark()
-
+            
         # the first column of the results row is the number of items
         results.append([len(array)])
 
@@ -53,11 +51,9 @@ def main(args):
         bulktime = [] 
         for j in range(REPEATS):
             start = datetime.datetime.now()
-            array.selectionsort()
+            selectionsort(array)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
-            # restore the array to original values
-            array.refresh()
         results[i].append(sum(bulktime)/len(bulktime))
 
         print("performing insertion sort...")
@@ -65,11 +61,9 @@ def main(args):
         bulktime = [] 
         for j in range(REPEATS):
             start = datetime.datetime.now()
-            array.insertionsort()
+            insertionsort(array)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
-            # restore the array to original values
-            array.refresh()
         results[i].append(sum(bulktime)/len(bulktime))
 
         print("performing merge sort...")
@@ -77,11 +71,9 @@ def main(args):
         bulktime = [] 
         for j in range(REPEATS):
             start = datetime.datetime.now()
-            array.mergesort()
+            mergesort(array)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
-            # restore the array to original values
-            array.refresh()
         results[i].append(sum(bulktime)/len(bulktime))
 
         print("performing quick sort...")
@@ -89,11 +81,9 @@ def main(args):
         bulktime = [] 
         for j in range(REPEATS):
             start = datetime.datetime.now()
-            array.quicksort()
+            quicksort(array)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
-            # restore the array to original values
-            array.refresh()
         results[i].append(sum(bulktime)/len(bulktime))
     #at the end, there's a massive 2D array of execution times for various amounts of data
 
@@ -101,4 +91,4 @@ def main(args):
     gnuplotter.buildtable(results,outfile)
 
 if __name__ == '__main__':
-    main(['main.py',0,10,1,'s'])
+    main(['main.py',0,10,1,'u'])
