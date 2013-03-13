@@ -7,17 +7,16 @@ import datetime
 import gnuplotter
 import random
 
-REPEATS = 10000
-
 def main(args):
-    if(4 > len(args)):
-        print('Usage: python3',args[0],'lowbound datapoints distance sorted/unsorted',file=sys.stderr)
+    if(5 > len(args)):
+        print('Usage: python3',args[0],'lowbound datapoints distance sorted/unsorted repeats',file=sys.stderr)
         return 1
 
-    lowbound = args[1]
-    datapoints = args[2]
-    stepsize = args[3]
+    lowbound = int(args[1])
+    datapoints = int(args[2])
+    stepsize = int(args[3])
     sorting = args[4]
+    REPEATS = int(args[5])
 
     #we need a number of items equal to the number of datapoints times
     #the distance between each
@@ -91,4 +90,4 @@ def main(args):
     gnuplotter.buildtable(results,outfile)
 
 if __name__ == '__main__':
-    main(['main.py',0,10,1,'u'])
+    main(sys.argv)
