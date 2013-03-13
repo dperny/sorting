@@ -60,7 +60,7 @@ def insertionsort(inlist):
         # advance
     return inlist
 
-def quicksort(inlist):
+def quicksort(inlist,start,length):
     #pick a pivot element
     if(len(inlist) <= 1):
         return inlist
@@ -89,7 +89,39 @@ def quicksort(inlist):
     return outlist
 
 
+def mergesort(inlist,low,mid,aux):
+    if (low - mid) <= 1:
+        return inlist
+    #split the list in half
+    middle = int((low - mid)/2)
 
+    #mergesort the two halves
+    inlist = merge(mergesort(inlist,low,mid,aux),mergesort(inlist,mid,len(inlist),aux))
+
+
+def merge(inlist,low,mid,high,aux):
+    i = low
+    j = mid
+    k = 0
+    while(i < mid and j < high):
+        if(inlist[i] < inlist[j]):
+            aux[k] = inlist[i]
+            i += 1
+            k += 1
+        else:
+            aux[k] = inlist[j]
+            j += 1
+            k += 1
+    while(i < mid):
+        aux[k] = inlist[i]
+        i += 1
+        k += 1
+    while(j < high):
+        aux[k] = inlist[j]
+        j += 1
+        k += 1
+    return aux
+"""
 def mergesort(inlist):
     if len(inlist) <= 1:
         return inlist
@@ -126,3 +158,10 @@ def merge(left, right):
         j += 1
 
     return result
+
+def testsort(inlist):
+    for i in (range(1,len(inlist))):
+        if(inlist.get(i-1) > inlist.get(i):
+            return False
+    return True
+"""

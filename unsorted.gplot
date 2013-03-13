@@ -2,7 +2,11 @@
 set term postscript enhanced eps monochrome  \
     fontfile "/usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb" \
     "SFCC1728"
+<<<<<<< HEAD
 set output "unsorted.eps"
+=======
+set output "Unsorted.eps"
+>>>>>>> ae23eee64cbebea950cc5d0faaba1c9c00f2ee2e
 set title "Run Time of Sorting Algorithms On Unsorted Data" 
 set xlabel "Number of Elements"
 set ylabel "Time (microseconds)"
