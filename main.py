@@ -6,6 +6,7 @@ import sys
 import datetime
 import gnuplotter
 import random
+from dcarray import *
 
 def main(args):
     if(5 > len(args)):
@@ -38,7 +39,7 @@ def main(args):
     for i in range(datapoints):
 
         # build and fill the array
-        array = SearchArray(i*stepsize)
+        array = DCArray(i*stepsize)
         for j in range(i*stepsize):
             array.backadd(values[j])
 
@@ -49,8 +50,9 @@ def main(args):
         # execute the sort REPEATS times, storing each execution on the end of bulktime
         bulktime = [] 
         for j in range(REPEATS):
+            sort = array.extract()
             start = datetime.datetime.now()
-            selectionsort(array)
+            selectionsort(sort)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
         results[i].append(sum(bulktime)/len(bulktime))
@@ -59,8 +61,9 @@ def main(args):
         # execute the sort REPEATS times, storing each execution on the end of bulktime
         bulktime = [] 
         for j in range(REPEATS):
+            sort = array.extract()
             start = datetime.datetime.now()
-            insertionsort(array)
+            insertionsort(sort)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
         results[i].append(sum(bulktime)/len(bulktime))
@@ -69,8 +72,9 @@ def main(args):
         # execute the sort REPEATS times, storing each execution on the end of bulktime
         bulktime = [] 
         for j in range(REPEATS):
+            sort = array.extract()
             start = datetime.datetime.now()
-            mergesort(array)
+            mergesort(sort)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
         results[i].append(sum(bulktime)/len(bulktime))
@@ -79,8 +83,9 @@ def main(args):
         # execute the sort REPEATS times, storing each execution on the end of bulktime
         bulktime = [] 
         for j in range(REPEATS):
+            sort = array.extract()
             start = datetime.datetime.now()
-            quicksort(array)
+            quicksort(sort)
             end = datetime.datetime.now()
             bulktime.append((end - start).microseconds)
         results[i].append(sum(bulktime)/len(bulktime))

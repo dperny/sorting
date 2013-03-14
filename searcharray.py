@@ -25,50 +25,41 @@ def insertionsort(inlist):
         # advance
     return inlist
 
-def quicksort(inlist,left,right):
-    #pick a pivot element
-    if(len(inlist) <= 1):
-        return inlist
-    pivot = int(len(inlist)/2)
-    lessers = SearchArray(len(inlist))
-    greaters = SearchArray(len(inlist))
+def quicksort(inlist,left = 0,right = None):
+    # if the rightmost value is none, then it's the len of the list
+    if right == None: right = len(inlist)
+    # if the list is larger than size 1
+    if (right - left) > 1:
+        #pivot is the middle value
+        pivot = int((left + right - 1)/2)
 
-    for i in range(len(inlist)):
-        if(i == pivot):
-            pass
-        elif(inlist.get(i) > inlist.get(pivot)):
-            greaters.backadd(inlist.get(i))
-        else:
-            lessers.backadd(inlist.get(i))
+        # partition the list, return the point of partition
+        newpivot = partition(inlist,left,right,pivot)
 
-    lessers = quicksort(lessers)
-    greaters = quicksort(greaters)
-    outlist = SearchArray(len(inlist))
+        quicksort(inlist,left,newpivot)
+        quicksort(inlist,newpivot+1,right)
 
-    for i in range(len(lessers)):
-        outlist.backadd(lessers.get(i))
-    outlist.backadd(inlist.get(pivot))
-    for i in range(len(greaters)):
-        outlist.backadd(greaters.get(i))
-
-    return outlist
-
-def quicksort(inlist,left,right):
-    #pick a pivot element
-    if left < right:
-        pivot = int((left+right)/2)
-
-        
+    return inlist
 
 def partition(inlist,left,right,pivot):
+    # pivotValue is the value of the item at pivot
     pivotValue = inlist[pivot]
-    inlist[pivot],inlist[right] = inlist[right],inlist[pivot]
+    # move the pivotValue to the rightmost element being partitioned
+    inlist[pivot],inlist[right-1] = inlist[right-1],inlist[pivot]
+    # store is the leftmost index
     store = left
+    # for the range from left to right, exclusive
     for i in range(left,right):
-        if inlist[i] > pivotValue:
+        # if i is less than the pivotvalue
+        if inlist[i] < pivotValue:
+            # swap i and the store
             inlist[i],inlist[store] = inlist[store],inlist[i]
+            # increment store
             store += 1
-        inlist[store],inlist[right] = inlist[right],inlist[store]
+    # swap the pivotvalue back in with the store
+    inlist[store],inlist[right-1] = inlist[right-1],inlist[store]
+    #return the location of the store
+    return store
 
 
 def mergesort(inlist,low=0,high=None):

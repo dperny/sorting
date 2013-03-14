@@ -36,7 +36,7 @@ def swap(array):
     j = random.randint(0,len(array)-1)
     # if the points are the same, get a new j
     while(j == i): 
-        j = random.randint(0,len(array)-1)
+        j = random.randint(0,(len(array)-1))
     # swap the values
     array[i],array[j] = array[j],array[i]
 
